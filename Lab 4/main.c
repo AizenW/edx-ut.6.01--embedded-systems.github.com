@@ -27,21 +27,6 @@ void delay(unsigned long halfsecs);
 void EnableInterrupts(void);  // Enable interrupts
 
 // 3. Subroutines Section
-
-/* 
-pseudo code
-1) Make PF1, PF2, and PF3 outputs.
-     Make PF0 and PF4 inputs (enable PUR for PF0 and PF4).
-2) If either SW1 or SW2 are off, the LEDs should be off.
-    If both SW1 and SW2 are on, the SOS is sent on the yellow LED
-            a) Send an ‘S’ as short short short pulses on the yellow LED
-            b) Send an ‘O’ as long long long pulses on the yellow LED
-            c) Send an ‘S’ as short short short pulses on the yellow LED
-            d) Wait 4 seconds
-3) Repeat step 2 over and over.
-*/
-
-// MAIN: Mandatory for a C Program to be executable
 int main(void){
   TExaS_Init(SW_PIN_PF40, LED_PIN_PF321);  // activate grader and set system clock to 80 MHz
   PortF_Init(); // Init port PF4 PF2 PF0    
@@ -55,12 +40,6 @@ int main(void){
 		delay(1); // delay between signals
   }
 }
-
-// Subroutine to initialize port F pins for input and output
-// PF4 is input SW1 and PF2 is output Blue LED
-// Inputs: None
-// Outputs: None
-// Notes: ...
 
 void PortF_Init(void){ volatile unsigned long delay;
   SYSCTL_RCGC2_R |= 0x00000020;     // 1) F clock
